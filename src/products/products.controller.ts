@@ -1,8 +1,15 @@
-import { Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Controller, Delete, Get, Inject, Param, Patch, Post } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
+import { PRODUCTS_SERVICE } from 'src/config';
 
 @Controller('products')
 export class ProductsController {
-  constructor() { }
+  // Inyección de dependencias
+  constructor(
+    @Inject(PRODUCTS_SERVICE) private readonly productsClient: ClientProxy
+  ) { }
+
+  /* Accediendo y conectando la lógica definida en ProductsMicroservice a este Gateway */
 
   @Post()
   createProduct() {
@@ -11,7 +18,12 @@ export class ProductsController {
 
   @Get()
   findAllProducts() {
-    return 'Listar los productos';
+    return this.productsClient.send(
+      // Patrón
+      { cmd: 'find_all_products' },
+      // Payload que recibiremos
+      {}
+    )
   }
 
   @Get(':id')
