@@ -39,7 +39,8 @@ export class ProductsController {
 
       return product;
     } catch (error) {
-      throw new BadRequestException(error);
+      // Error captado por el filtro global de excepciones
+      throw new RpcException(error);
     }
   }
 
