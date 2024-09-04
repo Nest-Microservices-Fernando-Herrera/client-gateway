@@ -6,7 +6,7 @@ import { RpcCustomExceptionFilter } from './common';
 
 async function bootstrap() {
   // Definiendo el Logger
-  const logger = new Logger('Main-Gateway')
+  const logger = new Logger('Main-Gateway');
 
   const app = await NestFactory.create(AppModule);
 
@@ -14,11 +14,13 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   // Configuración global de los Pipes
-  app.useGlobalPipes(new ValidationPipe({
-    // Habilitandod los DTOs
-    whitelist: true,
-    forbidNonWhitelisted: true,
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      // Habilitandod los DTOs
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
 
   // Configuración global de los Filters
   app.useGlobalFilters(new RpcCustomExceptionFilter());

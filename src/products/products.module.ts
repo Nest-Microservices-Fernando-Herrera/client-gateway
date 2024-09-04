@@ -8,15 +8,15 @@ import { ProductsController } from './products.controller';
     // Registro y conexión con los Microservicios
     ClientsModule.register([
       // Microservicios de Productos
-      { 
-        name: PRODUCTS_SERVICE, 
+      {
+        name: PRODUCTS_SERVICE,
         transport: Transport.TCP,
         options: {
           host: envs.productsMicroserviceHost,
-          port: envs.productsMicroservicePort
-        }
-       },
-    ])
+          port: envs.productsMicroservicePort,
+        },
+      },
+    ]),
   ],
   controllers: [ProductsController],
 })

@@ -13,11 +13,11 @@ import { OrdersController } from './orders.controller';
         transport: Transport.TCP,
         options: {
           host: envs.ordersMicroserviceHost,
-          port: envs.ordersMicroservicePort
-        }
+          port: envs.ordersMicroservicePort,
+        },
       },
-    ])
+    ]),
   ],
   controllers: [OrdersController],
 })
-export class OrdersModule { }
+export class OrdersModule {}
