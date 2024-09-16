@@ -1,23 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ClientsModule, Transport } from '@nestjs/microservices';
-import { envs, NATS_SERVICE } from 'src/config';
+import { envs } from 'src/config';
 import { ProductsController } from './products.controller';
+import { NatsModule } from 'src/transports/nats.module';
 
 @Module({
-  imports: [
-    // Registro y conexión con los Microservicios
-    ClientsModule.register([
-      // Microservicios de Productos
-      {
-        name: NATS_SERVICE,
-        transport: Transport.NATS,
-        options: {
-          servers: envs.natsServers,
-        },
-      },
-    ]),
-  ],
   controllers: [ProductsController],
+  imports: [NatsModule],
 })
 export class ProductsModule {
   constructor() {
